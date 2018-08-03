@@ -1,0 +1,3 @@
+[submodule "ansible/roles/ansible-hardening"]
+	path = ansible/roles/ansible-hardening
+	url = https://github.com/NeowayLabs/ansible-hardening

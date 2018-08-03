@@ -1,0 +1,13 @@
+# ansible
+ansible-azure.cache
+*.retry
+vault_password_file
+
+# terraform
+*.tfstate.*.backup
+*.tfstate.backup
+.terraform/
+errored.tfstate
+terraform.tfstate
+
+*.log

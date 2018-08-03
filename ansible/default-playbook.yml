@@ -1,0 +1,8 @@
+---
+ - name: Default playbook
+   become: yes
+   hosts: default
+   gather_facts: yes
+   roles:
+      - ansible-hardening
+      - node-exporter
