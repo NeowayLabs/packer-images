@@ -52,14 +52,6 @@ terraform-init:
 	terraform init \
 	.
 
-.PHONY: terraform-plan
-terraform-plan:
-	$(terraform-docker-run) \
-	terraform plan \
-	-var-file=${var-file} \
-	$(terraform-args) \
-	.
-
 # Packer commands
 
 .PHONY: packer-build
@@ -67,10 +59,10 @@ packer-build:
 	$(packer-docker-run) \
 	packer build -force provisioner.json
 
-	.PHONY: packer-debug
-	packer-build:
-		$(packer-docker-run) \
-		packer build -force -debug provisioner.json
+.PHONY: packer-debug
+packer-build:
+	$(packer-docker-run) \
+	packer build -force -debug provisioner.json
 
 # Default setup
 
