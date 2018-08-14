@@ -48,7 +48,7 @@ terraform-destroy:
 
 .PHONY: terraform-init
 terraform-init:
-	$(terraform-docker-run) \
+  $(terraform-docker-run) \
 	terraform init \
 	.
 
