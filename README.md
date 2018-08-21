@@ -28,16 +28,22 @@ Setup the docker image with [Terraform](https://www.terraform.io/) and [Packer](
 $ make setup
 ```
 
+## Create the infrastructure
+
+In this README file we use `images-builder` as `env` argument value. The following `env` are also available:
+ - images-builder
+ - images-tester
+
 ### Initialize the packer environment
 
 ```bash
-$ make terraform-init
+$ make terraform-init env=images-builder
 ```
 
 ### Create the packer environment
 
 ```bash
-$ make terraform-apply
+$ make terraform-apply env=images-builder
 ```
 
 ### Initialize packer
@@ -51,5 +57,5 @@ $ make packer-build
 TIP: Just use this if you want destroy everything what you build (include the packer image).
 
 ```bash
-$ make terraform-destroy
+$ make terraform-destroy env=images-builder
 ```
