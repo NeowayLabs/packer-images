@@ -2,6 +2,8 @@
 
 Default image builder for Neoway environment.
 
+This project was builded for grant a set of internal patterns of security and monitoring for all our machines. We use [Terraform](https://www.terraform.io) to provide the structure, [Packer](https://www.packer.io) to build the default image, [Ansible](https://www.ansible.com) to execute and install all what we want, and [Docker](https://www.docker.com) to put all this tools together and don't blow your localhost.
+
 ## Prerequisites
 
 * [Docker](https://docs.docker.com/engine/installation/)
