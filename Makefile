@@ -39,10 +39,6 @@ terraform-docker-run = $(base-docker-run) \
 	-w  /packer-images/$(provider-dir) \
 	-it packer-images
 
-terraform-docker-run = $(base-docker-run) \
-	-w  /packer-images/$(provider-dir) \
-	-it packer-images
-
 packer-docker-run = $(base-docker-run) \
 	-w  /packer-images/packer/providers/azure/image-ubuntu/ \
 	-it packer-images
