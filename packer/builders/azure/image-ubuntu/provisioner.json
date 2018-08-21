@@ -16,7 +16,7 @@
     "image_offer": "UbuntuServer",
     "image_sku": "16.04-LTS",
 
-    "managed_image_resource_group_name": "packer-images",
+    "managed_image_resource_group_name": "packer-images-resource-group",
     "managed_image_name": "default-image-azure",
 
     "location": "eastus2",
