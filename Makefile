@@ -40,7 +40,7 @@ terraform-docker-run = $(base-docker-run) \
 	-it packer-images
 
 packer-docker-run = $(base-docker-run) \
-	-w  /packer-images/packer/providers/azure/image-ubuntu/ \
+	-w  /packer-images/packer/builders/azure/image-ubuntu/ \
 	-it packer-images
 
 .PHONY: bash
