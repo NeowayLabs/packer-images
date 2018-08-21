@@ -1,7 +1,7 @@
-# Global Variables
+# Global variables
 
 variable "location" {
-  description = "The location where resources are created"
+  description = "The Azure Region in which the resources should exist"
   default     = "eastus2"
 }
 
@@ -9,7 +9,7 @@ variable "location" {
 
 variable "builder_resource_group_name" {
   description = "The name of the resouce groupe used by packer"
-  default     = "packer-images"
+  default     = "packer-images-resource-group"
 }
 
 variable "builder_image_name" {
@@ -19,6 +19,11 @@ variable "builder_image_name" {
 
 # Tester variables
 
+variable "prefix" {
+  description = "The Prefix used for all resources"
+  default     = "tester"
+}
+
 variable "tester_env" {
   description = "Default name for builder environment"
   default = "tester"
@@ -26,7 +31,7 @@ variable "tester_env" {
 
 variable "tester_resource_group_name" {
   description = "The name of the resouce groupe used by tester"
-  default     = "tester"
+  default     = "tester-images-resource-group"
 }
 
 variable "tester_vnet" {
@@ -57,8 +62,4 @@ variable "tester_user" {
 variable "tester_vm_size" {
   description = "Azure vm size"
   default = "Standard_DS2_v2"
-}
-
-variable "TF_VAR_user" {
-  default = ""
 }
