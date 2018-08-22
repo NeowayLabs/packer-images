@@ -14,7 +14,7 @@ variable "builder_resource_group_name" {
 
 variable "builder_image_name" {
   description = "Image name provisioned by packer"
-  default = "default-image-azure"
+  default     = "default-image-azure"
 }
 
 # Tester variables
@@ -26,7 +26,7 @@ variable "prefix" {
 
 variable "tester_env" {
   description = "Default name for builder environment"
-  default = "tester"
+  default     = "tester"
 }
 
 variable "tester_resource_group_name" {
@@ -36,30 +36,30 @@ variable "tester_resource_group_name" {
 
 variable "tester_vnet" {
   description = "Address for tester vnet"
-  default = "10.181.0.0/16"
+  default     = "10.181.0.0/16"
 }
 
 variable "tester_subnet" {
   description = "Address for tester subnet"
-  default = "10.181.1.0/24"
+  default     = "10.181.1.0/24"
 }
 
 variable "tester_nic_name" {
   description = "Nic tester name"
-  default = "tester-nic"
+  default     = "tester-nic"
 }
 
 variable "tester_vm_name" {
   description = "tester vm name"
-  default = "tester-vm"
+  default     = "tester-vm"
 }
 
 variable "tester_user" {
   description = "user for tester vm"
-  default = "packer"
+  default     = "packer"
 }
 
 variable "tester_vm_size" {
   description = "Azure vm size"
-  default = "Standard_DS2_v2"
+  default     = "Standard_DS2_v2"
 }
