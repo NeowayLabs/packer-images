@@ -1,4 +1,6 @@
-.DEFAULT_GOAL := setup
+include help.mk
+
+.DEFAULT_GOAL := help
 
 provider-dir = terraform/providers/azure/$(env)
 
@@ -50,7 +52,7 @@ bash:
 # Terraform commands
 
 .PHONY: terraform-apply
-terraform-apply: guard-env
+terraform-apply: guard-env ##@terraform Build specified environment
 	$(terraform-docker-run) \
 	terraform apply \
 	-auto-approve=false \
@@ -58,20 +60,20 @@ terraform-apply: guard-env
 	.
 
 .PHONY: terraform-destroy
-terraform-destroy: guard-env
+terraform-destroy: guard-env ##@terraform Destroy specified environment
 	$(terraform-docker-run) \
 	terraform destroy \
 	-parallelism=100 \
 	.
 
 .PHONY: terraform-init
-terraform-init: guard-env
+terraform-init: guard-env ##@terraform Initialize specified environment
 	$(terraform-docker-run) \
 	terraform init \
 	.
 
 .PHONY: terraform-fmt
-terraform-fmt:
+terraform-fmt: ##@terraform Rewrite configuration files to a canonical format and style
 	@$(base-docker-run) \
 	-w /packer-images/terraform \
 	-t packer-images \
@@ -80,19 +82,19 @@ terraform-fmt:
 # Packer commands
 
 .PHONY: packer-build
-packer-build:
+packer-build: ##@packer Build artifacts
 	$(packer-docker-run) \
 	packer build -force provisioner.json
 
 .PHONY: packer-debug
-packer-debug:
+packer-debug: ##@packer Build artifacts in debug mode
 	$(packer-docker-run) \
 	packer build -force -debug provisioner.json
 
 # Default setup
 
 .PHONY: setup
-setup:
+setup: ##@setup Build and copy the tools needed to run this project
 	@echo "Copying git hooks"
 	cp -v githooks/pre-commit .git/hooks/pre-commit && \
 	chmod +x .git/hooks/pre-commit
