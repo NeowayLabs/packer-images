@@ -17,7 +17,7 @@
     "image_sku": "16.04-LTS",
 
     "managed_image_resource_group_name": "packer-images-resource-group",
-    "managed_image_name": "default-image-azure",
+    "managed_image_name": "ubuntu-neoway-image",
 
     "location": "eastus2",
     "vm_size": "Standard_DS2_v2"

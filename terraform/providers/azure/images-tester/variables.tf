@@ -14,7 +14,7 @@ variable "builder_resource_group_name" {
 
 variable "builder_image_name" {
   description = "Image name provisioned by packer"
-  default     = "default-image-azure"
+  default     = "ubuntu-neoway-image"
 }
 
 # Tester variables
