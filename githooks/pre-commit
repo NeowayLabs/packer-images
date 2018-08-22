@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -e
+
+echo "Formatting files with terraform fmt command."
+
+FORMATTED_FILES=$(make terraform-fmt)
+
+if [[ "z$FORMATTED_FILES" != "z" ]]; then
+    echo "Following files were automatically formatted, review these changes before commit."
+    echo $FORMATTED_FILES
+    exit 1
+fi
+
+echo "All terraform files are formatted correctly. Yeah!"
+exit 0

@@ -70,6 +70,13 @@ terraform-init: guard-env
 	terraform init \
 	.
 
+.PHONY: terraform-fmt
+terraform-fmt:
+	@$(base-docker-run) \
+	-w /packer-images/terraform \
+	-t packer-images \
+	terraform fmt
+
 # Packer commands
 
 .PHONY: packer-build
@@ -86,6 +93,9 @@ packer-debug:
 
 .PHONY: setup
 setup:
+	@echo "Copying git hooks"
+	cp -v githooks/pre-commit .git/hooks/pre-commit && \
+	chmod +x .git/hooks/pre-commit
 	@echo "Updating submodules"
 	git submodule update --init --recursive
 	@echo "Building docker image"
