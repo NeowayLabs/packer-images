@@ -10,7 +10,7 @@ ifeq ($(UNAME_S),Linux)
 	-v $(SSH_AUTH_SOCK):$(SSH_AUTH_SOCK)
 endif
 ifeq ($(UNAME_S),Darwin)
-	docker_ssh_opts = -v $(HOME)/.ssh:/home/packer/.ssh:ro
+	docker_ssh_opts = -v $(HOME)/.ssh/id_rsa:/home/packer/.ssh/id_rsa:ro
 endif
 
 # All the defaults configurations to use inside your container.
@@ -39,11 +39,11 @@ guard-%:
 
 terraform-docker-run = $(base-docker-run) \
 	-w  /packer-images/$(provider-dir) \
-	-it packer-images
+	packer-images
 
 packer-docker-run = $(base-docker-run) \
 	-w  /packer-images/packer/builders/azure/image-ubuntu/ \
-	-it packer-images
+	packer-images
 
 .PHONY: bash
 bash:
