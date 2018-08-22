@@ -32,6 +32,6 @@ ADD https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERS
 RUN unzip /tmp/packer_${PACKER_VERSION}_linux_amd64.zip -d /usr/local/bin/ && \
     rm /tmp/packer_${PACKER_VERSION}_linux_amd64.zip
 
-RUN groupadd -r packer && useradd --no-log-init -r -g packer packer
+RUN groupadd -r packer && useradd --no-log-init -m -r -g packer packer
 
 USER packer
