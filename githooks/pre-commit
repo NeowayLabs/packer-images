@@ -2,9 +2,9 @@
 
 set -e
 
-echo "Formatting files with terraform fmt command."
+echo "Formatting terraform and packer files."
 
-FORMATTED_FILES=$(make terraform-fmt)
+FORMATTED_FILES=$(make terraform-fmt packer-fmt)
 
 if [[ "z$FORMATTED_FILES" != "z" ]]; then
     echo "Following files were automatically formatted, review these changes before commit."
@@ -12,5 +12,5 @@ if [[ "z$FORMATTED_FILES" != "z" ]]; then
     exit 1
 fi
 
-echo "All terraform files are formatted correctly. Yeah!"
+echo "All files are formatted correctly. Yeah!"
 exit 0

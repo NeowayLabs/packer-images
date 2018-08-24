@@ -13,6 +13,7 @@ RUN apt-get -y update && \
         unzip \
         git \
         vim \
+        jq \
         && \
     apt-get -y autoremove && \
     apt-get -y clean && \

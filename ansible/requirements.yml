@@ -1,0 +1,3 @@
+# ansible-hardening
+- src: https://github.com/NeowayLabs/ansible-hardening
+  version: stable/queens

@@ -75,6 +75,7 @@ terraform-init: guard-env ##@terraform Initialize specified environment
 .PHONY: terraform-fmt
 terraform-fmt: ##@terraform Rewrite configuration files to a canonical format and style
 	@$(base-docker-run) \
+	-u root \
 	-w /packer-images/terraform \
 	-t packer-images \
 	terraform fmt
@@ -91,6 +92,14 @@ packer-debug: ##@packer Build artifacts in debug mode
 	$(packer-docker-run) \
 	packer build -force -debug provisioner.json
 
+.PHONY: packer-fmt
+packer-fmt: ##@packer Rewrite configuration files to a canonical format and style
+	@$(base-docker-run) \
+	-u root \
+	-w /packer-images/hack \
+	-t packer-images \
+	bash packer-fmt.sh
+
 # Default setup
 
 .PHONY: setup
@@ -98,8 +107,6 @@ setup: ##@setup Build and copy the tools needed to run this project
 	@echo "Copying git hooks"
 	cp -v githooks/pre-commit .git/hooks/pre-commit && \
 	chmod +x .git/hooks/pre-commit
-	@echo "Updating submodules"
-	git submodule update --init --recursive
 	@echo "Building docker image"
 	docker build . -t packer-images
 	@echo "Done!"
