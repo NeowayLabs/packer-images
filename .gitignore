@@ -2,6 +2,7 @@
 ansible-azure.cache
 *.retry
 vault_password_file
+ansible/roles/
 
 # terraform
 *.tfstate.*.backup
