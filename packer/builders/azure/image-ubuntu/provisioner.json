@@ -23,7 +23,7 @@
   "provisioners": [
     {
       "type": "shell-local",
-      "command": "ansible-galaxy install -v -r /packer-images/ansible/requirements.yml -p /packer-images/ansible/roles/"
+      "command": "ansible-galaxy install -v -r /packer-images/ansible/requirements.yml"
     },
     {
       "type": "ansible",
