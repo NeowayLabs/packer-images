@@ -10,7 +10,7 @@ ifeq ($(UNAME_S),Linux)
 	--volume $(SSH_AUTH_SOCK):$(SSH_AUTH_SOCK)
 endif
 ifeq ($(UNAME_S),Darwin)
-	docker_ssh_opts = --volume $(HOME)/.ssh/id_rsa:/home/packer/.ssh/id_rsa:ro
+	docker_ssh_opts = --volume $(HOME)/.ssh/id_rsa:/root/.ssh/id_rsa:ro
 endif
 
 # All the defaults configurations to use inside your container.
@@ -50,7 +50,10 @@ packer-docker-run = $(base-docker-run) \
 
 .PHONY: bash
 bash:
-	$(base-docker-run) packer-images /bin/bash
+	$(base-docker-run) \
+	--interactive \
+	--tty \
+	packer-images /bin/bash
 
 # Terraform commands
 
@@ -82,6 +85,11 @@ terraform-fmt: ##@terraform Rewrite configuration files to a canonical format an
 	packer-images \
 	terraform fmt
 
+.PHONY: terraform-validate
+terraform-validate: guard-env ##@terraform Validate specified environment
+	@$(terraform-docker-run) \
+	terraform validate
+
 # Packer commands
 
 .PHONY: packer-build
@@ -100,6 +108,16 @@ packer-fmt: ##@packer Rewrite configuration files to a canonical format and styl
 	--workdir /packer-images/hack \
 	packer-images \
 	bash packer-fmt.sh
+
+.PHONY: packer-validate
+packer-validate: ##@packer Validate artifacts
+	@$(packer-docker-run) \
+	packer validate provisioner.json
+
+# Test commands
+.PHONY: test
+test: ##@test Run tests
+	bash hack/test.sh
 
 # Default setup
 
