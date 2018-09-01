@@ -7,28 +7,28 @@ provider-dir = terraform/providers/azure/$(env)
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 	docker_ssh_opts =  -e SSH_AUTH_SOCK=$(SSH_AUTH_SOCK) \
-	-v $(SSH_AUTH_SOCK):$(SSH_AUTH_SOCK)
+	--volume $(SSH_AUTH_SOCK):$(SSH_AUTH_SOCK)
 endif
 ifeq ($(UNAME_S),Darwin)
-	docker_ssh_opts = -v $(HOME)/.ssh/id_rsa:/home/packer/.ssh/id_rsa:ro
+	docker_ssh_opts = --volume $(HOME)/.ssh/id_rsa:/home/packer/.ssh/id_rsa:ro
 endif
 
 # All the defaults configurations to use inside your container.
 
 base-docker-run = docker run \
+	--env ARM_CLIENT_ID=$(AZURE_CLIENT_ID) \
+	--env ARM_CLIENT_SECRET=$(AZURE_CLIENT_SECRET) \
+	--env ARM_SUBSCRIPTION_ID=$(AZURE_SUBSCRIPTION_ID) \
+	--env ARM_TENANT_ID=$(AZURE_TENANT_ID) \
+	--env AZURE_CLIENT_ID=$(AZURE_CLIENT_ID) \
+	--env AZURE_CLIENT_SECRET=$(AZURE_CLIENT_SECRET) \
+	--env AZURE_SECRET=$(AZURE_CLIENT_SECRET) \
+	--env AZURE_SERVICE_PRINCIPAL=$(AZURE_SERVICE_PRINCIPAL) \
+	--env AZURE_SUBSCRIPTION_ID=$(AZURE_SUBSCRIPTION_ID) \
+	--env AZURE_TENANT=$(AZURE_TENANT_ID) \
+	--env AZURE_TENANT_ID=$(AZURE_TENANT_ID) \
 	--rm \
-	-e ARM_CLIENT_ID=$(AZURE_CLIENT_ID) \
-	-e ARM_CLIENT_SECRET=$(AZURE_CLIENT_SECRET) \
-	-e ARM_SUBSCRIPTION_ID=$(AZURE_SUBSCRIPTION_ID) \
-	-e ARM_TENANT_ID=$(AZURE_TENANT_ID) \
-	-e AZURE_CLIENT_ID=$(AZURE_CLIENT_ID) \
-	-e AZURE_CLIENT_SECRET=$(AZURE_CLIENT_SECRET) \
-	-e AZURE_SECRET=$(AZURE_CLIENT_SECRET) \
-	-e AZURE_SERVICE_PRINCIPAL=$(AZURE_SERVICE_PRINCIPAL) \
-	-e AZURE_SUBSCRIPTION_ID=$(AZURE_SUBSCRIPTION_ID) \
-	-e AZURE_TENANT=$(AZURE_TENANT_ID) \
-	-e AZURE_TENANT_ID=$(AZURE_TENANT_ID) \
-	-v $(shell pwd):/packer-images \
+	--volume $(shell pwd):/packer-images \
 	$(docker_ssh_opts) \
 
 guard-%:
@@ -38,16 +38,19 @@ guard-%:
 	fi
 
 terraform-docker-run = $(base-docker-run) \
-	-w  /packer-images/$(provider-dir) \
+	--interactive \
+	--tty \
+	--workdir /packer-images/$(provider-dir) \
 	packer-images
 
 packer-docker-run = $(base-docker-run) \
-	-w  /packer-images/packer/builders/azure/image-ubuntu/ \
+	--user packer \
+	--workdir /packer-images/packer/builders/azure/image-ubuntu/ \
 	packer-images
 
 .PHONY: bash
 bash:
-	$(base-docker-run) -it packer-images /bin/bash
+	$(base-docker-run) packer-images /bin/bash
 
 # Terraform commands
 
@@ -75,8 +78,8 @@ terraform-init: guard-env ##@terraform Initialize specified environment
 .PHONY: terraform-fmt
 terraform-fmt: ##@terraform Rewrite configuration files to a canonical format and style
 	@$(base-docker-run) \
-	-w /packer-images/terraform \
-	-t packer-images \
+	--workdir /packer-images/terraform \
+	packer-images \
 	terraform fmt
 
 # Packer commands
@@ -91,6 +94,13 @@ packer-debug: ##@packer Build artifacts in debug mode
 	$(packer-docker-run) \
 	packer build -force -debug provisioner.json
 
+.PHONY: packer-fmt
+packer-fmt: ##@packer Rewrite configuration files to a canonical format and style
+	@$(base-docker-run) \
+	--workdir /packer-images/hack \
+	packer-images \
+	bash packer-fmt.sh
+
 # Default setup
 
 .PHONY: setup
@@ -98,8 +108,6 @@ setup: ##@setup Build and copy the tools needed to run this project
 	@echo "Copying git hooks"
 	cp -v githooks/pre-commit .git/hooks/pre-commit && \
 	chmod +x .git/hooks/pre-commit
-	@echo "Updating submodules"
-	git submodule update --init --recursive
 	@echo "Building docker image"
 	docker build . -t packer-images
 	@echo "Done!"

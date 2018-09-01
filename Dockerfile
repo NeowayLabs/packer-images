@@ -13,6 +13,7 @@ RUN apt-get -y update && \
         unzip \
         git \
         vim \
+        jq \
         && \
     apt-get -y autoremove && \
     apt-get -y clean && \
@@ -33,5 +34,3 @@ RUN unzip /tmp/packer_${PACKER_VERSION}_linux_amd64.zip -d /usr/local/bin/ && \
     rm /tmp/packer_${PACKER_VERSION}_linux_amd64.zip
 
 RUN groupadd -r packer && useradd --no-log-init -m -r -g packer packer
-
-USER packer
