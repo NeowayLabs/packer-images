@@ -1,3 +1,7 @@
 # ansible-hardening
 - src: https://github.com/NeowayLabs/ansible-hardening
   version: stable/queens
+
+# ansible-role-pcp
+- src: https://github.com/NeowayLabs/ansible-role-pcp
+  version: v1.0
