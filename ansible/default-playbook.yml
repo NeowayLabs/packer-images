@@ -5,3 +5,4 @@
    gather_facts: yes
    roles:
       - ansible-hardening
+      - ansible-role-pcp

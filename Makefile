@@ -10,7 +10,7 @@ ifeq ($(UNAME_S),Linux)
 	--volume $(SSH_AUTH_SOCK):$(SSH_AUTH_SOCK)
 endif
 ifeq ($(UNAME_S),Darwin)
-	docker_ssh_opts = --volume $(HOME)/.ssh/id_rsa:/home/packer/.ssh/id_rsa:ro
+	docker_ssh_opts = --volume $(HOME)/.ssh/:/home/packer/.ssh/:ro
 endif
 
 # All the defaults configurations to use inside your container.
