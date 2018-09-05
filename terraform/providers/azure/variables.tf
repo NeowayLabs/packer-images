@@ -14,7 +14,7 @@ variable "builder_resource_group_name" {
 
 variable "builder_image_name" {
   description = "Image name provisioned by packer"
-  default     = "default-image-azure"
+  default     = "ubuntu-neoway-image"
 }
 
 # Tester variables
@@ -61,5 +61,5 @@ variable "tester_user" {
 
 variable "tester_vm_size" {
   description = "Azure vm size"
-  default     = "Standard_DS2_v2"
+  default     = "Standard_B1s"
 }
