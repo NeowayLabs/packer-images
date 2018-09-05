@@ -61,5 +61,5 @@ variable "tester_user" {
 
 variable "tester_vm_size" {
   description = "Azure vm size"
-  default     = "Standard_DS2_v2"
+  default     = "Standard_B1s"
 }
