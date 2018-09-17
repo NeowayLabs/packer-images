@@ -51,14 +51,21 @@ $ make setup
 NOTE: If you are using Digital Ocean as your cloud provider, you can jump this step to [packer](#initialize-packer)
 
 
-In this README file we use `images-builder` as `env` argument value. The following `env` are also available:
+In this README file we use `azure` as `provider` argument value, and `images-builder` as `env` argument value. The following `provider` and `env` are also available:
+
+provider
+ - azure
+ - digital-ocean
+
+env
  - images-builder
  - images-tester
+
 
 ### Initialize the packer environment
 
 ```bash
-$ make terraform-init env=images-builder
+$ make terraform-init provider=azure env=images-builder
 ```
 
 ### Create the packer environment
