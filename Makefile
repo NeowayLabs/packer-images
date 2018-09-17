@@ -2,7 +2,8 @@ include help.mk
 
 .DEFAULT_GOAL := help
 
-provider-dir = terraform/providers/azure/$(env)
+provider-dir-terraform = terraform/providers/azure/$(env)
+provider-dir-packer = packer/builders/$(env)/$(image)
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
@@ -27,6 +28,7 @@ base-docker-run = docker run \
 	--env AZURE_SUBSCRIPTION_ID=$(AZURE_SUBSCRIPTION_ID) \
 	--env AZURE_TENANT=$(AZURE_TENANT_ID) \
 	--env AZURE_TENANT_ID=$(AZURE_TENANT_ID) \
+	--env DO_API_KEY=$(DO_API_KEY) \
 	--rm \
 	--volume $(shell pwd):/packer-images \
 	$(docker_ssh_opts) \
@@ -40,17 +42,17 @@ guard-%:
 terraform-docker-run = $(base-docker-run) \
 	--interactive \
 	--tty \
-	--workdir /packer-images/$(provider-dir) \
+	--workdir /packer-images/$(provider-dir-terraform) \
 	packer-images
 
 packer-docker-run = $(base-docker-run) \
 	--user packer \
-	--workdir /packer-images/packer/builders/azure/image-ubuntu/ \
+	--workdir /packer-images/$(provider-dir-packer) \
 	packer-images
 
 .PHONY: bash
 bash:
-	$(base-docker-run) packer-images /bin/bash
+	$(base-docker-run) -it packer-images /bin/bash
 
 # Terraform commands
 
@@ -85,7 +87,7 @@ terraform-fmt: ##@terraform Rewrite configuration files to a canonical format an
 # Packer commands
 
 .PHONY: packer-build
-packer-build: ##@packer Build artifacts
+packer-build: guard-env guard-image ##@packer Build artifacts
 	$(packer-docker-run) \
 	packer build -force provisioner.json
 
