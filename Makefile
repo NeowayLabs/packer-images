@@ -2,7 +2,7 @@ include help.mk
 
 .DEFAULT_GOAL := help
 
-provider-dir-terraform = terraform/providers/azure/$(env)
+provider-dir-terraform = terraform/providers/$(provider)/$(env)
 provider-dir-packer = packer/builders/$(env)/$(image)
 
 UNAME_S := $(shell uname -s)
@@ -29,6 +29,7 @@ base-docker-run = docker run \
 	--env AZURE_TENANT=$(AZURE_TENANT_ID) \
 	--env AZURE_TENANT_ID=$(AZURE_TENANT_ID) \
 	--env DO_API_KEY=$(DO_API_KEY) \
+	--env TF_VAR_do_token=$(DO_API_KEY) \
 	--rm \
 	--volume $(shell pwd):/packer-images \
 	$(docker_ssh_opts) \
@@ -57,7 +58,7 @@ bash:
 # Terraform commands
 
 .PHONY: terraform-apply
-terraform-apply: guard-env ##@terraform Build specified environment
+terraform-apply: guard-provider guard-env ##@terraform Build specified environment
 	$(terraform-docker-run) \
 	terraform apply \
 	-auto-approve=false \
@@ -65,14 +66,14 @@ terraform-apply: guard-env ##@terraform Build specified environment
 	.
 
 .PHONY: terraform-destroy
-terraform-destroy: guard-env ##@terraform Destroy specified environment
+terraform-destroy: guard-provider guard-env ##@terraform Destroy specified environment
 	$(terraform-docker-run) \
 	terraform destroy \
 	-parallelism=100 \
 	.
 
 .PHONY: terraform-init
-terraform-init: guard-env ##@terraform Initialize specified environment
+terraform-init: guard-provider guard-env ##@terraform Initialize specified environment
 	$(terraform-docker-run) \
 	terraform init \
 	.
