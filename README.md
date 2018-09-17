@@ -71,11 +71,11 @@ $ make terraform-apply env=images-builder
 
 In this README file we use `azure` as `env` argument value, and `image-ubuntu` as `image` argument value. The following `env` and `images` are also available:
 
-* env
+env
  - azure
  - digital-ocean
 
-* images
+images
  - image-ubuntu
 
 ```bash
