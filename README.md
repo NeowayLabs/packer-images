@@ -15,6 +15,7 @@ This project was builded for grant a set of internal patterns of security and mo
 At moment, this project supports:
 - Azure
 - Digital Ocean
+
 Feel free to add more builders. The list of available builders are [here](https://www.packer.io/docs/builders/index.html).
 
 ### Export your credentials as environment variables
