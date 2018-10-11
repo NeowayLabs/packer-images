@@ -3,8 +3,6 @@
 set -o errexit
 set -o nounset
 
-make setup
-
 #Initialize packer environment
 make terraform-init env=images-builder
 make terraform-apply env=images-builder
