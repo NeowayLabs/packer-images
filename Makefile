@@ -59,7 +59,7 @@ terraform-apply: guard-env ##@terraform Build specified environment
 	@echo "Building terrform environment..."
 	@$(terraform-docker-run) \
 	terraform apply \
-	-auto-approve=yes \
+	-auto-approve=true \
 	-parallelism=100 \
 	.
 
@@ -68,7 +68,7 @@ terraform-destroy: guard-env ##@terraform Destroy specified environment
 	@echo "Destroying terrform environment..."
 	@$(terraform-docker-run) \
 	terraform destroy \
-	-auto-approve=yes \
+	-auto-approve=true \
 	-parallelism=100 \
 	.
 
