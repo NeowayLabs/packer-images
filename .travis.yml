@@ -5,10 +5,14 @@ services:
 before_install:
   - sudo apt-get -qq update
   - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-ce
-  - sudo ssh-keygen -b 2048 -t rsa -f /root/.ssh/id_rsa -q -N ""
+  - mkdir .ssh
+  - sudo ssh-keygen -b 2048 -t rsa -f .ssh/id_rsa -q -N ""
   - cp hack/test.sh .
+  - pwd
+  - cat .ssh/id_rsa
+  - cat .ssh/id_rsa.pub
 install:
   - pip install docker-py
 script:
-  - make setup
-  - make test
+#  - make setup
+#  - make test
