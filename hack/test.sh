@@ -3,9 +3,6 @@
 set -o errexit
 set -o nounset
 
-#Generate a temporary key
-sudo ssh-keygen -b 2048 -t rsa -f /root/.ssh/id_rsa -q -N ""
-
 #Initialize packer environment
 make terraform-init env=images-builder
 make terraform-apply env=images-builder
