@@ -75,7 +75,7 @@ terraform-destroy: guard-env ##@terraform Destroy specified environment
 .PHONY: terraform-init
 terraform-init: guard-env ##@terraform Initialize specified environment
 	@echo "Starting terrform environment..."
-	$(terraform-docker-run) \
+	@$(terraform-docker-run) \
 	terraform init \
 	.
 
@@ -110,7 +110,6 @@ packer-fmt: ##@packer Rewrite configuration files to a canonical format and styl
 test: ##@test Run CI tests on travis to all build steps
 	@echo "Starting CI tests..."
 	@$(base-docker-run) \
-	--workdir /packer-images/hack \
 	packer-images \
 	bash test.sh
 
