@@ -8,11 +8,7 @@ before_install:
   - mkdir keys
   - ssh-keygen -b 2048 -t rsa -f /home/travis/build/NeowayLabs/packer-images/keys/id_rsa -q -N ""
   - cp hack/test.sh .
-  - pwd
-  - cat /home/travis/build/NeowayLabs/packer-images/keys/id_rsa
-  - cat /home/travis/build/NeowayLabs/packer-images/keys/id_rsa.pub
-install:
   - pip install docker-py
 script:
-#  - make setup
-#  - make test
+  - make setup
+  - make test
