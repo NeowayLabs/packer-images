@@ -100,7 +100,7 @@ resource "azurerm_virtual_machine" "tester_vm" {
 
     ssh_keys {
       path     = "/home/${var.tester_user}/.ssh/authorized_keys"
-      key_data = "${file("/root/.ssh/id_rsa.pub")}"
+      key_data = "${file("/home/travis/build/NeowayLabs/packer-images/keys/id_rsa.pub")}"
     }
   }
 }
