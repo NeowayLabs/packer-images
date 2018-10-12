@@ -5,7 +5,7 @@ services:
 before_install:
   - sudo apt-get -qq update
   - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-ce
-  - ssh-keygen -b 2048 -t rsa -f /home/travis/build/NeowayLabs/packer-images/keys -q -N ""
+  - ssh-keygen -b 2048 -t rsa -f /home/travis/build/NeowayLabs/packer-images/keys/id_rsa -q -N ""
   - cp hack/test.sh .
   - pwd
   - cat /home/travis/build/NeowayLabs/packer-images/keys/id_rsa
