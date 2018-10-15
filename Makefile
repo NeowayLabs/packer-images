@@ -60,7 +60,6 @@ terraform-apply: guard-env ##@terraform Build specified environment
 	@$(terraform-docker-run) \
 	terraform apply \
 	-auto-approve=true \
-	-parallelism=100 \
 	.
 
 .PHONY: terraform-destroy
