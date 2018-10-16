@@ -62,7 +62,7 @@ resource "azurerm_network_interface" "tester_nic" {
 
 data "azurerm_image" "tester_image" {
   name                = "${var.builder_image_name}"
-  resource_group_name = "${azurerm_resource_group.tester_rg.name}"
+  resource_group_name = "${var.builder_resource_group_name}"
 }
 
 # Create virutal machine
