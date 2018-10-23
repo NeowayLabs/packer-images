@@ -108,7 +108,7 @@ packer-fmt: ##@packer Rewrite configuration files to a canonical format and styl
 .PHONY: test
 test: ##@test Run CI tests on travis to all build steps
 	@echo "Starting CI tests..."
-	bash test.sh
+	bash hack/test.sh
 
 # Default setup
 
