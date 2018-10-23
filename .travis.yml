@@ -1,0 +1,13 @@
+sudo: required
+language: python
+services:
+  - docker
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-ce
+  - mkdir keys
+  - ssh-keygen -b 2048 -t rsa -f /home/travis/build/NeowayLabs/packer-images/keys/id_rsa -q -N ""
+  - pip install docker-py
+script:
+  - make setup
+  - make test

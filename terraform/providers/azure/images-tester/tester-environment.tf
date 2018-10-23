@@ -21,14 +21,14 @@ resource "azurerm_virtual_network" "tester_vnet" {
   name                = "${var.prefix}-vnet"
   address_space       = ["${var.tester_vnet}"]
   location            = "${var.location}"
-  resource_group_name = "${var.tester_resource_group_name}"
+  resource_group_name = "${azurerm_resource_group.tester_rg.name}"
 }
 
 # Create Subnet
 
 resource "azurerm_subnet" "tester_subnet" {
   name                 = "${var.prefix}-subnet"
-  resource_group_name  = "${var.tester_resource_group_name}"
+  resource_group_name  = "${azurerm_resource_group.tester_rg.name}"
   virtual_network_name = "${azurerm_virtual_network.tester_vnet.name}"
   address_prefix       = "${var.tester_subnet}"
 }
@@ -38,7 +38,7 @@ resource "azurerm_subnet" "tester_subnet" {
 resource "azurerm_public_ip" "tester_public_ip" {
   name                         = "${var.prefix}-public-ip"
   location                     = "${var.location}"
-  resource_group_name          = "${var.tester_resource_group_name}"
+  resource_group_name          = "${azurerm_resource_group.tester_rg.name}"
   public_ip_address_allocation = "dynamic"
 }
 
@@ -47,7 +47,7 @@ resource "azurerm_public_ip" "tester_public_ip" {
 resource "azurerm_network_interface" "tester_nic" {
   name                = "${var.tester_nic_name}"
   location            = "${var.location}"
-  resource_group_name = "${var.tester_resource_group_name}"
+  resource_group_name = "${azurerm_resource_group.tester_rg.name}"
 
   ip_configuration {
     name                          = "nic-config"
@@ -70,7 +70,7 @@ data "azurerm_image" "tester_image" {
 resource "azurerm_virtual_machine" "tester_vm" {
   name                  = "${var.prefix}-vm"
   location              = "${var.location}"
-  resource_group_name   = "${var.tester_resource_group_name}"
+  resource_group_name   = "${azurerm_resource_group.tester_rg.name}"
   network_interface_ids = ["${azurerm_network_interface.tester_nic.id}"]
   vm_size               = "${var.tester_vm_size}"
 
@@ -100,7 +100,7 @@ resource "azurerm_virtual_machine" "tester_vm" {
 
     ssh_keys {
       path     = "/home/${var.tester_user}/.ssh/authorized_keys"
-      key_data = "${file("~/.ssh/id_rsa.pub")}"
+      key_data = "${file("/packer-images/keys/id_rsa.pub")}"
     }
   }
 }
