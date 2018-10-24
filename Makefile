@@ -50,28 +50,31 @@ packer-docker-run = $(base-docker-run) \
 
 .PHONY: bash
 bash:
-	$(base-docker-run) packer-images /bin/bash
+	@$(base-docker-run) -it packer-images /bin/bash
 
 # Terraform commands
 
 .PHONY: terraform-apply
 terraform-apply: guard-env ##@terraform Build specified environment
-	$(terraform-docker-run) \
+	@echo "Building terrform environment..."
+	@$(terraform-docker-run) \
 	terraform apply \
-	-auto-approve=false \
-	-parallelism=100 \
+	-auto-approve=true \
 	.
 
 .PHONY: terraform-destroy
 terraform-destroy: guard-env ##@terraform Destroy specified environment
-	$(terraform-docker-run) \
+	@echo "Destroying terrform environment..."
+	@$(terraform-docker-run) \
 	terraform destroy \
+	-auto-approve=true \
 	-parallelism=100 \
 	.
 
 .PHONY: terraform-init
 terraform-init: guard-env ##@terraform Initialize specified environment
-	$(terraform-docker-run) \
+	@echo "Starting terrform environment..."
+	@$(terraform-docker-run) \
 	terraform init \
 	.
 
@@ -86,7 +89,8 @@ terraform-fmt: ##@terraform Rewrite configuration files to a canonical format an
 
 .PHONY: packer-build
 packer-build: ##@packer Build artifacts
-	$(packer-docker-run) \
+	@echo "Starting packer build..."
+	@$(packer-docker-run) \
 	packer build -force provisioner.json
 
 .PHONY: packer-debug
@@ -100,6 +104,11 @@ packer-fmt: ##@packer Rewrite configuration files to a canonical format and styl
 	--workdir /packer-images/hack \
 	packer-images \
 	bash packer-fmt.sh
+
+.PHONY: test
+test: ##@test Run CI tests on travis to all build steps
+	@echo "Starting CI tests..."
+	bash hack/test.sh
 
 # Default setup
 
