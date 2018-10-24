@@ -17,6 +17,14 @@ variable "builder_image_name" {
   default     = "ubuntu-neoway-image"
 }
 
+variable "builder_storage_account_name" {
+  default = "neowayimagesstorage"
+}
+
+variable "builder_storage_container_name" {
+  default = "neowayimagescontainer"
+}
+
 # Tester variables
 
 variable "prefix" {
