@@ -73,7 +73,7 @@ $ make terraform-init provider=azure env=images-builder
 ### Create the packer environment
 
 ```bash
-$ make terraform-apply env=images-builder
+$ make terraform-apply provider=azure env=images-builder
 ```
 
 ### Initialize packer
