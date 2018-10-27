@@ -53,28 +53,32 @@ packer-docker-run = $(base-docker-run) \
 
 .PHONY: bash
 bash:
-	$(base-docker-run) -it packer-images /bin/bash
+	@$(base-docker-run) -it packer-images /bin/bash
+
 
 # Terraform commands
 
 .PHONY: terraform-apply
-terraform-apply: guard-provider guard-env ##@terraform Build specified environment
-	$(terraform-docker-run) \
+terraform-apply: guard-env ##@terraform Build specified environment
+	@echo "Building terrform environment..."
+	@$(terraform-docker-run) \
 	terraform apply \
-	-auto-approve=false \
-	-parallelism=100 \
+	-auto-approve=true \
 	.
 
 .PHONY: terraform-destroy
-terraform-destroy: guard-provider guard-env ##@terraform Destroy specified environment
-	$(terraform-docker-run) \
+terraform-destroy: guard-env ##@terraform Destroy specified environment
+	@echo "Destroying terrform environment..."
+	@$(terraform-docker-run) \
 	terraform destroy \
+	-auto-approve=true \
 	-parallelism=100 \
 	.
 
 .PHONY: terraform-init
-terraform-init: guard-provider guard-env ##@terraform Initialize specified environment
-	$(terraform-docker-run) \
+terraform-init: guard-env ##@terraform Initialize specified environment
+	@echo "Starting terrform environment..."
+	@$(terraform-docker-run) \
 	terraform init \
 	.
 
@@ -88,8 +92,9 @@ terraform-fmt: ##@terraform Rewrite configuration files to a canonical format an
 # Packer commands
 
 .PHONY: packer-build
-packer-build: guard-env guard-image ##@packer Build artifacts
-	$(packer-docker-run) \
+packer-build: ##@packer Build artifacts
+	@echo "Starting packer build..."
+	@$(packer-docker-run) \
 	packer build -force provisioner.json
 
 .PHONY: packer-debug
@@ -103,6 +108,11 @@ packer-fmt: ##@packer Rewrite configuration files to a canonical format and styl
 	--workdir /packer-images/hack \
 	packer-images \
 	bash packer-fmt.sh
+
+.PHONY: test
+test: ##@test Run CI tests on travis to all build steps
+	@echo "Starting CI tests..."
+	bash hack/test.sh
 
 # Default setup
 
