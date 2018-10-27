@@ -59,7 +59,7 @@ bash:
 # Terraform commands
 
 .PHONY: terraform-apply
-terraform-apply: guard-env ##@terraform Build specified environment
+terraform-apply: guard-provider guard-env ##@terraform Build specified environment
 	@echo "Building terrform environment..."
 	@$(terraform-docker-run) \
 	terraform apply \
@@ -67,7 +67,7 @@ terraform-apply: guard-env ##@terraform Build specified environment
 	.
 
 .PHONY: terraform-destroy
-terraform-destroy: guard-env ##@terraform Destroy specified environment
+terraform-destroy: guard-provider guard-env ##@terraform Destroy specified environment
 	@echo "Destroying terrform environment..."
 	@$(terraform-docker-run) \
 	terraform destroy \
@@ -76,7 +76,7 @@ terraform-destroy: guard-env ##@terraform Destroy specified environment
 	.
 
 .PHONY: terraform-init
-terraform-init: guard-env ##@terraform Initialize specified environment
+terraform-init: guard-provider guard-env ##@terraform Initialize specified environment
 	@echo "Starting terrform environment..."
 	@$(terraform-docker-run) \
 	terraform init \
@@ -92,7 +92,7 @@ terraform-fmt: ##@terraform Rewrite configuration files to a canonical format an
 # Packer commands
 
 .PHONY: packer-build
-packer-build: ##@packer Build artifacts
+packer-build: guard-env guard-image ##@packer Build artifacts
 	@echo "Starting packer build..."
 	@$(packer-docker-run) \
 	packer build -force provisioner.json
