@@ -7,5 +7,5 @@ variable "location" {
 
 variable "do_token" {
   description = "Digital Ocean API KEY"
-  default = ""
+  default     = ""
 }

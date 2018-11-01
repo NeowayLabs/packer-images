@@ -1,6 +1,6 @@
 {
   "variables": {
-      "DO_API_KEY": "{{env `DO_API_KEY`}}"
+    "DO_API_KEY": "{{env `DO_API_KEY`}}"
   },
   "builders": [
     {
@@ -21,7 +21,9 @@
     {
       "type": "ansible",
       "playbook_file": "/packer-images/ansible/default-playbook.yml",
-      "extra_arguments": [ "-e ansible_python_interpreter=/usr/bin/python3"],
+      "extra_arguments": [
+        "-e ansible_python_interpreter=/usr/bin/python3"
+      ],
       "user": "root"
     }
   ]
