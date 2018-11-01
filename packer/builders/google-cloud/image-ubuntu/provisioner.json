@@ -1,0 +1,26 @@
+{
+  "builders": [
+    {
+      "type": "googlecompute",
+      "account_file": "../account.json",
+      "project_id": "blackops-qa",
+      "source_image": "ubuntu-1604-xenial-v20181030",
+      "ssh_username": "root",
+      "zone": "us-east4-a"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell-local",
+      "command": "ansible-galaxy install -v -r /packer-images/ansible/requirements.yml"
+    },
+    {
+      "type": "ansible",
+      "playbook_file": "/packer-images/ansible/default-playbook.yml",
+      "extra_arguments": [
+        "-e ansible_python_interpreter=/usr/bin/python3"
+      ],
+      "user": "root"
+    }
+  ]
+}
