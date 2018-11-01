@@ -36,12 +36,15 @@ Feel free to add more builders. The list of available builders are [here](https:
 On this project we separate the multi cloud schema and tools, with arguments on execution of Makefile. The valid arguments are:
 
 - `provider`
+
 Used to set the cloud provider to build and manage your image. The valid providers at this time are:`azure`,`google-cloud` and `digital-ocean`.
 
 - `env`
+
 Set the terraform environment to build your structure to build, deploy or test your image. The valid envs at this time are:`images-builder`,`images-tester` and `images-publisher`.
 
 - `image`
+
 Choose the OS type what you want to build. The valid images at this time are: `image-ubuntu`
 
 Inside each cloud provider documentation, has a example with this arguments.
