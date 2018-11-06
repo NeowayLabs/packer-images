@@ -12,7 +12,7 @@ $ export AZURE_SUBSCRIPTION_ID=YOUR_AZURE_SUBSCRIPTION_ID
 $ export AZURE_TENANT_ID=YOUR_AZURE_TENANT_ID
 ```
 
-## Create the infrastructure
+## Create the infrastructure 
 
 ### Initialize the packer environment with terraform
 
