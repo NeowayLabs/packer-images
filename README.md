@@ -29,11 +29,10 @@ At moment, this project supports:
 
 Feel free to add more builders. The list of available builders are [here](https://www.packer.io/docs/builders/index.html).
 
-###
 
 ## Arguments
 
-On this project we separate the multi cloud schema and tools, with arguments on execution of Makefile. The valid arguments are:
+On this project we separate the multi cloud schema and tools using arguments when executing make. The valid arguments are:
 
 - `provider`
 
@@ -48,3 +47,8 @@ Set the terraform environment to build your structure to build, deploy or test y
 Choose the OS type what you want to build. The valid images at this time are: `image-ubuntu`
 
 Inside each cloud provider documentation, has a example with this arguments.
+
+## Project particularities
+
+- Travis CI:
+- Debug:
