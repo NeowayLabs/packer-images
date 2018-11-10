@@ -1,10 +1,14 @@
 {
+  "variables": {
+    "image_name": "{{env `TRAVIS_BUILD_ID`}}"
+  },
   "builders": [
     {
       "type": "googlecompute",
-      "account_file": "../account.json",
+      "account_file": "/tmp/google-cloud-account.json",
       "project_id": "blackops-qa",
       "source_image": "ubuntu-1604-xenial-v20181030",
+      "image_name": "neoway-image-{{user `image_name`}}",
       "ssh_username": "root",
       "zone": "us-east4-a"
     }
