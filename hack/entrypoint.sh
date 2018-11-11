@@ -12,7 +12,7 @@ if [[ ${status} = "0" ]]; then
 		echo "Error: You need declare and export TF_VAR_gcp_token variable"
 		exit 1
 	fi
-	echo $TF_VAR_gcp_token | jq . > /tmp/google-cloud-account.json
+	echo ${TF_VAR_gcp_token} | jq . > /tmp/google-cloud-account.json
 fi
 
 /bin/bash -c "${*}"
