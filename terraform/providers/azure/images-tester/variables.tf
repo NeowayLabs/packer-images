@@ -63,3 +63,8 @@ variable "tester_vm_size" {
   description = "Azure vm size"
   default     = "Standard_B1s"
 }
+
+variable "vhd_url" {
+  description = "VHD url created by packer"
+  default = "https://neowayimagesstorage.blob.core.windows.net/system/Microsoft.Compute/Images/neowayimagescontainer/neoway-packer-image-osDisk.ebf3cbdc-ec18-47f2-962d-83430fdc95f7.vhd"
+}
