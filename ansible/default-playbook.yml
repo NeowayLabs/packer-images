@@ -4,5 +4,5 @@
    hosts: default
    gather_facts: yes
    roles:
-      - ansible-hardening
+      - ansible-role-ubuntu-hardening
       - ansible-role-pcp
