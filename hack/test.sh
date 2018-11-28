@@ -7,7 +7,6 @@ set -o nounset
 
 #Execute packer
 
-cat /tmp/google-cloud-account.json
 make packer-build env=google-cloud image=image-ubuntu
 
 #Initialize tester environment
