@@ -5,7 +5,7 @@
   "builders": [
     {
       "type": "googlecompute",
-      "account_file": "/tmp/google-cloud-account.json",
+      "account_file": "/tmp/.gcp/credentials.json",
       "project_id": "blackops-qa",
       "source_image": "ubuntu-1604-xenial-v20181114",
       "image_name": "neoway-image-{{user `image_name`}}",

@@ -3,7 +3,7 @@
 provider "google" {
   project     = "${var.project}"
   region      = "${var.location}"
-  credentials = "${file("/root/.gcp/credentials.json")}"
+  credentials = "${file("/tmp/.gcp/credentials.json")}"
 }
 
 terraform {
