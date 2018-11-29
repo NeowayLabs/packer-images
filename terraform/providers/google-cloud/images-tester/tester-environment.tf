@@ -3,7 +3,7 @@
 provider "google" {
   project     = "${var.project}"
   region      = "${var.location}"
-  credentials = "${var.gcp_token}"
+  credentials = "${file("/root/.gcp/credentials.json")}"
 }
 
 terraform {
@@ -29,7 +29,4 @@ resource "google_compute_instance" "tester_vm" {
     }
   }
 
-  # service_account {
-  #   scopes = ["userinfo-email", "compute-ro", "storage-ro"]
-  # }
 }

@@ -29,10 +29,8 @@ base-docker-run = docker run \
 	--env AZURE_TENANT=$(AZURE_TENANT_ID) \
 	--env AZURE_TENANT_ID=$(AZURE_TENANT_ID) \
 	--env DO_API_KEY \
-	--env TF_VAR_gcp_token \
+	--env GCP_TOKEN \
 	--env TF_VAR_travis_build_id=$(TRAVIS_BUILD_ID) \
-	--env TRAVIS_BUILD_ID \
-	--env TRAVIS_gcp_token \
 	--rm \
 	--volume $(shell pwd):/packer-images \
 	$(docker_ssh_opts) \
