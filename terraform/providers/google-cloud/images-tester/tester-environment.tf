@@ -28,5 +28,4 @@ resource "google_compute_instance" "tester_vm" {
       // Ephemeral IP
     }
   }
-
 }

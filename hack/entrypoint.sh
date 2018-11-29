@@ -16,11 +16,12 @@ if [[ ${status} = "0" ]]; then
     # Running inside Travis CI or local
     if [[ -z ${TRAVIS_BUILD_ID} ]]; then
         mkdir -p /tmp/.gcp
-        echo ${GCP_TOKEN} | base64 -d > ${credentials_file}
-    else
         echo ${GCP_TOKEN} | jq . > ${credentials_file}
         export TRAVIS_BUILD_ID=${RANDOM}
         export TF_VAR_travis_build_id=${TRAVIS_BUILD_ID}
+    else
+        mkdir -p /tmp/.gcp
+        echo ${GCP_TOKEN} | base64 -d > ${credentials_file}
     fi
 fi
 

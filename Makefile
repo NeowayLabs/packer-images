@@ -31,6 +31,7 @@ base-docker-run = docker run \
 	--env DO_API_KEY \
 	--env GCP_TOKEN \
 	--env TF_VAR_travis_build_id=$(TRAVIS_BUILD_ID) \
+	--env TRAVIS_BUILD_ID \
 	--rm \
 	--volume $(shell pwd):/packer-images \
 	$(docker_ssh_opts) \
