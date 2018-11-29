@@ -21,5 +21,6 @@ if [[ ${status} = "0" ]]; then
         export TRAVIS_BUILD_ID=${RANDOM}
         export TF_VAR_travis_build_id=${TRAVIS_BUILD_ID}
     fi
+fi
 
 /bin/bash -c "${*}"
