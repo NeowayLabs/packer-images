@@ -10,8 +10,16 @@ terraform {
   required_version = "0.11.7"
 }
 
+resource "random_id" "server" {
+  keepers = {
+    gcp_id = "${var.gcp_id}"
+  }
+
+  byte_length = 8
+}
+
 resource "google_compute_instance" "tester_vm" {
-  name         = "tester-vm"
+  name         = "tester-vm-${random_id.server.hex}"
   machine_type = "n1-standard-1"
   zone         = "${var.location}"
 
