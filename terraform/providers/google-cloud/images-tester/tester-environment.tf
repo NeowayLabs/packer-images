@@ -11,10 +11,6 @@ terraform {
 }
 
 resource "random_id" "server" {
-  keepers = {
-    gcp_id = "${var.gcp_id}"
-  }
-
   byte_length = 8
 }
 
