@@ -10,4 +10,7 @@ vault_password_file
 errored.tfstate
 terraform.tfstate
 
+#google-cloud
+account.json
+
 *.log

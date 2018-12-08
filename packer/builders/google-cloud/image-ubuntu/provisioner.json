@@ -1,16 +1,16 @@
 {
   "variables": {
-    "DO_API_KEY": "{{env `DO_API_KEY`}}"
+    "image_name": "{{env `TRAVIS_BUILD_ID`}}"
   },
   "builders": [
     {
-      "type": "digitalocean",
-      "api_token": "{{user `DO_API_KEY`}}",
-      "image": "ubuntu-16-04-x64",
-      "snapshot_name": "ubuntu-neoway-image",
-      "region": "nyc3",
-      "size": "512mb",
-      "ssh_username": "root"
+      "type": "googlecompute",
+      "account_file": "/tmp/.gcp/credentials.json",
+      "project_id": "blackops-qa",
+      "source_image": "ubuntu-1604-xenial-v20181114",
+      "image_name": "neoway-image-{{user `image_name`}}",
+      "ssh_username": "root",
+      "zone": "us-east4-a"
     }
   ],
   "provisioners": [

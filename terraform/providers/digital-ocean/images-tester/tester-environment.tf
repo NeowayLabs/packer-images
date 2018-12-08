@@ -10,9 +10,9 @@ terraform {
 
 # Select snapshot to build
 
-    data "digitalocean_image" "snapshot" {
-      name = "ubuntu-neoway-image"
-    }
+data "digitalocean_image" "snapshot" {
+  name = "ubuntu-neoway-image"
+}
 
 # Create Droplet from packer snapshot
 
@@ -22,11 +22,10 @@ resource "digitalocean_droplet" "droplet" {
   region = "${var.location}"
   size   = "512mb"
 
-
   connection {
-      user = "packer"
-      type = "ssh"
-      private_key = "${file("~/.ssh/id_rsa")}"
-      timeout = "2m"
+    user        = "packer"
+    type        = "ssh"
+    private_key = "${file("~/.ssh/id_rsa")}"
+    timeout     = "2m"
   }
 }
