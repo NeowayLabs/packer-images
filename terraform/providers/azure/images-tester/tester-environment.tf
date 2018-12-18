@@ -61,7 +61,7 @@ resource "azurerm_network_interface" "tester_nic" {
 # This Custom Image already builded by packer
 
 resource "azurerm_image" "tester_image" {
-  name                = "acctest"
+  name                = "tester-image"
   location            = "${var.location}"
   resource_group_name = "packer-images-resource-group"
 
@@ -108,7 +108,7 @@ resource "azurerm_virtual_machine" "tester_vm" {
 
     ssh_keys {
       path     = "/home/${var.tester_user}/.ssh/authorized_keys"
-      key_data = "${file("/packer-images/keys/id_rsa.pub")}"
+      key_data = "${file("/home/packer/.ssh/id_rsa.pub")}"
     }
   }
 }
