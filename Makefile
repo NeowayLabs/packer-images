@@ -30,6 +30,7 @@ base-docker-run = docker run \
 	--env AZURE_TENANT_ID=$(AZURE_TENANT_ID) \
 	--env DO_API_KEY=$(DO_API_KEY) \
 	--env TF_VAR_do_token=$(DO_API_KEY) \
+	--env TF_VAR_vhd_url=`cat packer/builders/azure/image-ubuntu/manifest.json | jq -r '.builds[] | .artifact_id'` \
 	--rm \
 	--volume $(shell pwd):/packer-images \
 	$(docker_ssh_opts) \
