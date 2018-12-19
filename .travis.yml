@@ -8,7 +8,7 @@ before_install:
   - mkdir keys
   - ssh-keygen -b 2048 -t rsa -f /home/travis/build/NeowayLabs/packer-images/keys/id_rsa -q -N ""
   - pip install docker-py
-  - ls -la /home/travis/build/NeowayLabs/packer-images/packer/builders/azure/image-ubuntu/
+  - chmod 777 /home/travis/build/NeowayLabs/packer-images/packer/builders/azure/image-ubuntu/
 script:
   - make setup
   - make test
