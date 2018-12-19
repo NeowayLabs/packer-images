@@ -34,3 +34,9 @@ RUN unzip /tmp/packer_${PACKER_VERSION}_linux_amd64.zip -d /usr/local/bin/ && \
     rm /tmp/packer_${PACKER_VERSION}_linux_amd64.zip
 
 RUN groupadd -r packer && useradd --no-log-init -m -r -g packer packer
+
+COPY hack/entrypoint.sh /entrypoint.sh
+
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]

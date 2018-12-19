@@ -13,4 +13,7 @@ terraform.tfstate
 # azure
 manifest.json
 
+#google-cloud
+account.json
+
 *.log
