@@ -35,4 +35,4 @@ RUN unzip /tmp/packer_${PACKER_VERSION}_linux_amd64.zip -d /usr/local/bin/ && \
 
 RUN groupadd -r packer && useradd --no-log-init -m -r -g packer packer
 
-COPY --chown=travis . /home/travis/build/NeowayLabs/packer-images
+COPY --chown=root . /home/travis/build/NeowayLabs/packer-images
