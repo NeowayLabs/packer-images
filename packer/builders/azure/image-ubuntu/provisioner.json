@@ -43,7 +43,7 @@
       "type": "shell"
     }
   ],
-    "post-processors": [
+  "post-processors": [
     {
       "type": "manifest",
       "output": "manifest.json",

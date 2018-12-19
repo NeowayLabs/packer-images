@@ -66,5 +66,5 @@ variable "tester_vm_size" {
 
 variable "vhd_url" {
   description = "VHD url created by packer"
-  default = ""
+  default     = ""
 }
