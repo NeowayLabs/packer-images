@@ -42,5 +42,12 @@
       "inline_shebang": "/bin/sh -x",
       "type": "shell"
     }
+  ],
+  "post-processors": [
+    {
+      "type": "manifest",
+      "output": "manifest.json",
+      "strip_path": true
+    }
   ]
 }
