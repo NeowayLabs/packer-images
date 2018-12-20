@@ -3,8 +3,6 @@
    become: yes
    hosts: default
    gather_facts: yes
-   vars:
-     ubuntu_hardening_extra_users:
-       - "packer"
    roles:
+      - ansible-role-ubuntu-hardening
       - ansible-role-pcp
