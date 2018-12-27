@@ -26,6 +26,7 @@ At moment, this project supports:
 - [Azure](docs/azure.md)
 - [Google Cloud](docs/gcp.md)
 - [Digital Ocean](docs/do.md)
+- [Amazon Web Services](docs/aws.md)
 
 Feel free to add more builders. The list of available builders are [here](https://www.packer.io/docs/builders/index.html).
 
@@ -36,7 +37,7 @@ On this project we separate the multi cloud schema and tools using arguments whe
 
 - `provider`
 
-Used to set the cloud provider to build and manage your image. The valid providers at this time are:`azure`,`google-cloud` and `digital-ocean`.
+Used to set the cloud provider to build and manage your image. The valid providers at this time are:`azure`,`google-cloud`, `digital-ocean` and `aws`.
 
 - `env`
 
