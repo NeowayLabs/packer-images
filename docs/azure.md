@@ -14,7 +14,7 @@ $ export AZURE_TENANT_ID=YOUR_AZURE_TENANT_ID
 
 ## Create the infrastructure
 
-### Initialize the packer environment with terraform 
+### Initialize the packer environment with terraform
 
 This step initialize with terraform an environment where the VHD created by packer will be stored.
 
@@ -33,7 +33,7 @@ $ make terraform-apply provider=azure env=images-builder
 ### Initialize packer
 
 ```bash
-$ make packer-build env=azure image=image-ubuntu
+$ make packer-build env=azure image=image-ubuntu-18-04
 ```
 
 After this step, you will have a blob storage with your VHD builded.
