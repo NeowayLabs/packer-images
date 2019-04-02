@@ -7,16 +7,16 @@ set -o nounset
 
 #Execute packer
 
-make packer-build env=google-cloud image=image-ubuntu
+#make packer-build env=google-cloud image=image-ubuntu
 
 #Initialize tester environment
-make terraform-init provider=google-cloud env=images-tester
-make terraform-apply provider=google-cloud env=images-tester
+#make terraform-init provider=google-cloud env=images-tester
+#make terraform-apply provider=google-cloud env=images-tester
 
 #todo test goss
 
 #Destroy tester environment
-make terraform-destroy provider=google-cloud env=images-tester
+#make terraform-destroy provider=google-cloud env=images-tester
 
 
 ### Azure Tests ###
