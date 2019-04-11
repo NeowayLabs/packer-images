@@ -1,0 +1,37 @@
+{
+  "variables": {
+    "aws_access_key": "{{env `AWS_ACCESS_KEY`}}",
+    "aws_secret_key": "{{env `AWS_SECRET_KEY`}}",
+    "vpc_region": "{{env `AWS_VPC_REGION`}}",
+    "source_ami": "ami-0f9cf087c1f27d9b1",
+    "instance_type": "t3.micro",
+    "image_name": "{{env `TRAVIS_BUILD_ID`}}"
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "access_key": "{{user `aws_access_key`}}",
+      "secret_key": "{{user `aws_secret_key`}}",
+      "region": "{{user `vpc_region`}}",
+      "source_ami": "{{user `source_ami`}}",
+      "instance_type": "{{user `instance_type`}}",
+      "ami_name": "neoway-image-{{user `image_name`}}",
+      "ssh_username": "ubuntu",
+      "ami_groups": "all"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell-local",
+      "command": "ansible-galaxy install -v -r /packer-images/ansible/requirements.yml"
+    },
+    {
+      "type": "ansible",
+      "playbook_file": "/packer-images/ansible/default-playbook.yml",
+      "extra_arguments": [
+        "-e ansible_python_interpreter=/usr/bin/python3"
+      ],
+      "user": "ubuntu"
+    }
+  ]
+}

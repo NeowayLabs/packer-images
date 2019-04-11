@@ -8,7 +8,7 @@ provider-dir-packer = packer/builders/$(env)/$(image)
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 	docker_ssh_opts =  -e SSH_AUTH_SOCK=$(SSH_AUTH_SOCK) \
-	--volume $(SSH_AUTH_SOCK):$(SSH_AUTH_SOCK)
+	--volume $(SSH_AUTH_SOCK):$(SSH_AUTH_SOCK) --volume $(HOME)/.ssh/:/home/packer/.ssh/:ro
 endif
 ifeq ($(UNAME_S),Darwin)
 	docker_ssh_opts = --volume $(HOME)/.ssh/:/home/packer/.ssh/:ro
@@ -28,6 +28,11 @@ base-docker-run = docker run \
 	--env AZURE_SUBSCRIPTION_ID=$(AZURE_SUBSCRIPTION_ID) \
 	--env AZURE_TENANT=$(AZURE_TENANT_ID) \
 	--env AZURE_TENANT_ID=$(AZURE_TENANT_ID) \
+	--env AWS_ACCESS_KEY \
+	--env AWS_SECRET_KEY \
+	--env AWS_VPC_REGION \
+	--env AWS_INSTANCE_TYPE \
+	--env TF_VAR_aws_ssh_keyname=$(AWS_SSH_KEYNAME) \
 	--env DO_API_KEY \
 	--env GCP_TOKEN \
 	--env TF_VAR_travis_build_id=$(TRAVIS_BUILD_ID) \
