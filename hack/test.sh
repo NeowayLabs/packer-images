@@ -16,7 +16,7 @@ make terraform-apply provider=google-cloud env=images-tester
 #todo test goss
 
 #Destroy tester environment
-#make terraform-destroy provider=google-cloud env=images-tester
+make terraform-destroy provider=google-cloud env=images-tester
 
 
 ### Azure Tests ###
