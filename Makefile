@@ -99,6 +99,12 @@ packer-build: guard-env guard-image ##@packer Build artifacts
 	@$(packer-docker-run) \
 	packer build -force provisioner.json
 
+.PHONY: packer-build-latest
+packer-build-latest: guard-env guard-image ##@packer Build artifacts
+	@echo "Starting packer build..."
+	@$(packer-docker-run) \
+	packer build -force provisioner-latest.json
+
 .PHONY: packer-debug
 packer-debug: ##@packer Build artifacts in debug mode
 	$(packer-docker-run) \
