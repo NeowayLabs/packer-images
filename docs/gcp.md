@@ -16,6 +16,14 @@ $ make packer-build env=google-cloud image=image-ubuntu
 
 After this step, you will have a image on your image list repository, inside the project where your Service Account Key was generated.
 
+This image use a `build ID` for create a tag version.
+To build the latest version use the command:
+
+```bash
+$ make packer-build-latest env=google-cloud image=image-ubuntu
+```
+
+
 ### Destroy the packer environment
 
 TIP: don't destroy the `env` where is the build image. You will use this for your VMs later.
