@@ -22,16 +22,16 @@ make terraform-destroy provider=google-cloud env=images-tester
 ### Azure Tests ###
 
 #Initialize packer environment
-make terraform-init provider=azure env=images-builder
-make terraform-apply provider=azure env=images-builder
+#make terraform-init provider=azure env=images-builder
+#make terraform-apply provider=azure env=images-builder
 
-make packer-build env=azure image=image-ubuntu
+#make packer-build env=azure image=image-ubuntu
 
 #Initialize tester environment
-make terraform-init provider=azure env=images-tester
-make terraform-apply provider=azure env=images-tester
+#make terraform-init provider=azure env=images-tester
+#make terraform-apply provider=azure env=images-tester
 
 #todo test goss
 
 #Destroy tester environment
-make terraform-destroy provider=azure env=images-tester
+#make terraform-destroy provider=azure env=images-tester
