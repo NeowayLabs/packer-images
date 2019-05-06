@@ -126,3 +126,9 @@ setup: ##@setup Build and copy the tools needed to run this project
 	@echo "Building docker image"
 	docker build . -t packer-images
 	@echo "Done!"
+
+.PHONY: pull
+pull: ##@pull the latest docker version from dockerhub
+	@echo "Downloading docker image"
+	docker pull neowaylabs/packer-images
+	@echo "Done!"
