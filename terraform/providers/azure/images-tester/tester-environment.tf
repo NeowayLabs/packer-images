@@ -60,9 +60,17 @@ resource "azurerm_network_interface" "tester_nic" {
 # Set image to terraform use on VM
 # This Custom Image already builded by packer
 
-data "azurerm_image" "tester_image" {
-  name                = "${var.builder_image_name}"
-  resource_group_name = "${var.builder_resource_group_name}"
+resource "azurerm_image" "tester_image" {
+  name                = "tester-image"
+  location            = "${var.location}"
+  resource_group_name = "packer-images-resource-group"
+
+  os_disk {
+    os_type  = "Linux"
+    os_state = "Generalized"
+    blob_uri = "${var.vhd_url}"
+    size_gb  = 30
+  }
 }
 
 # Create virutal machine
@@ -79,7 +87,7 @@ resource "azurerm_virtual_machine" "tester_vm" {
   delete_os_disk_on_termination = true
 
   storage_image_reference {
-    id = "${data.azurerm_image.tester_image.id}"
+    id = "${azurerm_image.tester_image.id}"
   }
 
   storage_os_disk {
@@ -92,7 +100,7 @@ resource "azurerm_virtual_machine" "tester_vm" {
   os_profile {
     admin_username = "${var.tester_user}"
     admin_password = ""
-    computer_name  = "${var.tester_vm_name}"
+    computer_name  = "${var.prefix}-vm"
   }
 
   os_profile_linux_config {

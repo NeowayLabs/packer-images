@@ -32,6 +32,7 @@ base-docker-run = docker run \
 	--env GCP_TOKEN \
 	--env TF_VAR_travis_build_id=$(TRAVIS_BUILD_ID) \
 	--env TRAVIS_BUILD_ID \
+	--env TF_VAR_vhd_url=`cat packer/builders/azure/image-ubuntu/manifest.json | jq -r '.builds[] | .artifact_id'` \
 	--rm \
 	--volume $(shell pwd):/packer-images \
 	$(docker_ssh_opts) \

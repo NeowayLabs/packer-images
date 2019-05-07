@@ -63,3 +63,8 @@ variable "tester_vm_size" {
   description = "Azure vm size"
   default     = "Standard_B1s"
 }
+
+variable "vhd_url" {
+  description = "VHD url created by packer"
+  default     = ""
+}
