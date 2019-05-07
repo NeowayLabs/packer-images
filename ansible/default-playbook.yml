@@ -7,5 +7,5 @@
      ubuntu_hardening_extra_users:
        - "packer"
    roles:
-    # - ansible-role-pcp
+      - ansible-role-pcp
       - ansible-role-ubuntu-hardening
