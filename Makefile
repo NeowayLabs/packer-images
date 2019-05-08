@@ -46,16 +46,16 @@ terraform-docker-run = $(base-docker-run) \
 	--interactive \
 	--tty \
 	--workdir /packer-images/$(provider-dir-terraform) \
-	packer-images
+	neowaylabs/packer-images
 
 packer-docker-run = $(base-docker-run) \
 	--user packer \
 	--workdir /packer-images/$(provider-dir-packer) \
-	packer-images
+	neowaylabs/packer-images
 
 .PHONY: bash
 bash:
-	@$(base-docker-run) -it packer-images /bin/bash
+	@$(base-docker-run) -it neowaylabs/packer-images /bin/bash
 
 
 # Terraform commands
@@ -125,4 +125,10 @@ setup: ##@setup Build and copy the tools needed to run this project
 	chmod +x .git/hooks/pre-commit
 	@echo "Building docker image"
 	docker build . -t packer-images
+	@echo "Done!"
+
+.PHONY: pull
+pull: ##@pull the latest docker version from dockerhub
+	@echo "Downloading docker image"
+	docker pull neowaylabs/packer-images
 	@echo "Done!"
