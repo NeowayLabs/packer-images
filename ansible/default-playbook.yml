@@ -6,7 +6,7 @@
   vars:
       ubuntu_hardening_extra_users:
           - packer
-      build-id: '{{ lookup(''env'',''TRAVIS_BUILD_ID'') }}'
+      build-id: "{{ lookup('env','TRAVIS_BUILD_ID') }}"
   roles:
       - ansible-role-pcp
       - ansible-role-ubuntu-hardening
