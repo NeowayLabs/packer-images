@@ -1,19 +1,18 @@
 ---
-- name: 'Default playbook'
-  become: true
-  hosts: default
-  gather_facts: true
-  vars:
-      ubuntu_hardening_extra_users:
-          - packer
-      build-id:
-          "{{ lookup('env','TRAVIS_BUILD_ID') }}"
-  roles:
+ - name: Default playbook
+   become: yes
+   hosts: default
+   gather_facts: yes
+   vars:
+     ubuntu_hardening_extra_users:
+       - "packer"
+
+   roles:
       - ansible-role-pcp
       - ansible-role-ubuntu-hardening
-  tasks:
-      -
-          name: 'Create neoway release file'
-          copy: null
-          dest: /etc/neoway-release
-          content: "neoway-base-image\n build-id:\"{{ build-id }}\"\n"
+
+   tasks:
+     - name: Create neoway release file
+       copy:
+         dest: /etc/neoway-release
+         content: "neoway-base-image\nbuild-id:\"{{ lookup('env','TRAVIS_BUILD_ID') }}\"\n"
