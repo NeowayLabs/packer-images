@@ -6,6 +6,13 @@
    vars:
      ubuntu_hardening_extra_users:
        - "packer"
+
    roles:
       - ansible-role-pcp
       - ansible-role-ubuntu-hardening
+
+   tasks:
+     - name: Create neoway release file
+       copy:
+         dest: /etc/neoway-release
+         content: "neoway-base-image\nbuild-id:\"{{ lookup('env','TRAVIS_BUILD_ID') }}\"\n"
