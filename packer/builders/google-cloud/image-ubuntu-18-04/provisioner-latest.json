@@ -8,7 +8,7 @@
       "account_file": "/tmp/.gcp/credentials.json",
       "project_id": "blackops-qa",
       "source_image": "ubuntu-1804-bionic-v20190404",
-      "image_name": "neoway-image-{{user `image_name`}}",
+      "image_name": "neoway-image-latest",
       "ssh_username": "root",
       "zone": "us-east4-a"
     }

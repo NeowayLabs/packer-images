@@ -8,6 +8,7 @@ set -o nounset
 #Execute packer
 
 make packer-build env=google-cloud image=image-ubuntu-18-04
+make packer-build-latest env=google-cloud image=image-ubuntu-18-04
 
 #Initialize tester environment
 make terraform-init provider=google-cloud env=images-tester
