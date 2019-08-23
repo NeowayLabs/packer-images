@@ -8,7 +8,6 @@
        - "packer"
 
    roles:
-      #- ansible-role-pcp
       - ansible-role-ubuntu-hardening
 
    tasks:
