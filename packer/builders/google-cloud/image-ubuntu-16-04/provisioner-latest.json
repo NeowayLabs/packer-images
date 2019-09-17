@@ -8,7 +8,7 @@
       "account_file": "/tmp/.gcp/credentials.json",
       "project_id": "blackops-qa",
       "source_image": "ubuntu-1604-xenial-v20181114",
-      "image_name": "neoway-image-latest",
+      "image_name": "neoway-image-1604-latest",
       "ssh_username": "root",
       "zone": "us-east4-a"
     }
